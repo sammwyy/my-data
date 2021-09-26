@@ -54,9 +54,17 @@ async function showDevice() {
   });
 }
 
+async function getIP() {
+  const req = await fetch("https://api.ipify.org/?format=json");
+  const res = await req.json();
+  return res.ip;
+}
+
 async function showGEO() {
   let error = null;
-  const req = await fetch("http://ip-api.com/json/?fields=61439").catch((e) => {
+
+  const ip = await getIP();
+  const req = await fetch("https://ipwhois.app/json/" + ip).catch((e) => {
     console.error(e);
     error = e.message;
     return null;
@@ -69,12 +77,12 @@ async function showGEO() {
       title: "Geo",
       content: {
         Country: res.country,
-        Region: res.regionName,
+        Region: res.region,
         City: res.city,
-        Zip: res.zip,
-        Coordinates: "Lat: " + res.lat + ", Lon: " + res.lon,
+        Coordinates: "Lat: " + res.latitude + ", Lon: " + res.longitude,
         ISP: res.isp,
-        IP: res.query,
+        IP: ip,
+        "IP Type": res.type,
       },
     });
   } else {
