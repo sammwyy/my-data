@@ -63,12 +63,19 @@ async function getIP() {
 async function showGEO() {
   let error = null;
 
-  const ip = await getIP();
-  const req = await fetch("https://ipwhois.app/json/" + ip).catch((e) => {
+  const ip = await getIP().catch((e) => {
     console.error(e);
     error = e.message;
     return null;
   });
+
+  const req = ip
+    ? await fetch("https://ipwhois.app/json/" + ip).catch((e) => {
+        console.error(e);
+        error = e.message;
+        return null;
+      })
+    : null;
 
   const res = req ? await req.json() : null;
 
@@ -91,6 +98,7 @@ async function showGEO() {
       content: {
         error: "Cannot fetch for Geo data.",
         message: error,
+        tip: "AntiTrack triggered? Disable if you are using Brave.",
       },
     });
   }
