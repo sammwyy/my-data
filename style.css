@@ -1,0 +1,62 @@
+.hero {
+  text-align: center;
+  margin: 10% 0;
+}
+
+.hero > p {
+  font-size: 22px;
+}
+
+.sections {
+  width: auto;
+}
+
+.section {
+  display: inline-flex;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #ddd;
+  width: 33%;
+  text-align: center;
+}
+
+.section-body {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.section-content {
+  margin-top: 10px;
+}
+
+.section-item {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.section-key {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.section-value {
+  font-size: 18px;
+  color: #444;
+}
+
+@media (max-width: 1000px) {
+  .section {
+    width: 48%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    width: 100%;
+  }
+}
