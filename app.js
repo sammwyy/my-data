@@ -40,16 +40,20 @@ function createSectionDOMObject(section) {
 }
 
 async function showDevice() {
+  const navigatorConnection = navigator.connection ? {
+    Downlink: navigator.connection.downlink,
+    "Effective Type": navigator.connection.effectiveType,
+    "Connection Type": navigator.connection.type,
+  } : {};
+
   sections.push({
     title: "Device",
     content: {
-      Manufacturer: platform.manufacturer,
+      Manufacturer: platform.manufacturer || navigator.vendor,
       Product: platform.product,
       OS: platform.os,
       "Screen size": window.screen.width + "x" + window.screen.height,
-      Downlink: navigator.connection.downlink,
-      "Effective Type": navigator.connection.effectiveType,
-      "Connection Type": navigator.connection.type,
+      ...navigatorConnection,
     },
   });
 }
